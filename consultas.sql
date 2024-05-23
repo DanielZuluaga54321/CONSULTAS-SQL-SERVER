@@ -1,3 +1,31 @@
+-- Crear tabla tbl_Persona
+CREATE TABLE tbl_Persona (
+    Cedula INT PRIMARY KEY,
+    nombrePersona NVARCHAR(100),
+    direccionPersona NVARCHAR(255),
+    edadPersona INT
+);
+
+-- Crear tabla tbl_Producto
+CREATE TABLE tbl_Producto (
+    idProducto INT IDENTITY(1,1) PRIMARY KEY,
+    nombreProducto NVARCHAR(100),
+    precioProducto DECIMAL(10, 2),
+    cedula INT,
+    FOREIGN KEY (cedula) REFERENCES tbl_Persona(Cedula)
+);
+
+-- Crear tabla tbl_Venta
+CREATE TABLE tbl_Venta (
+    idVenta INT IDENTITY(1,1) PRIMARY KEY,
+    Cedula_Persona INT,
+    idProducto INT,
+    hora_compra TIME,
+    FOREIGN KEY (Cedula_Persona) REFERENCES tbl_Persona(Cedula),
+    FOREIGN KEY (idProducto) REFERENCES tbl_Producto(idProducto)
+);
+
+
 select * FROM tbl_Persona
 select * from tbl_Producto
 select * from tbl_Venta
